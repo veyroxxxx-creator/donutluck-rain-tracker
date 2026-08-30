@@ -12,7 +12,7 @@ export function NotificationPermissionPrompt() {
   if (!supported) {
     return (
       <p className="text-xs text-muted">
-        Browser notifications aren't supported in this browser. Sound alerts will still work.
+        Browser notifications aren&apos;t supported in this browser. Sound alerts will still work.
       </p>
     );
   }
@@ -20,7 +20,7 @@ export function NotificationPermissionPrompt() {
   if (permission === 'denied') {
     return (
       <p className="text-xs text-danger">
-        Notifications are blocked. Allow them from your browser's site settings to receive alerts.
+        Notifications are blocked. Allow them from your browser&apos;s site settings to receive alerts.
       </p>
     );
   }
@@ -29,7 +29,7 @@ export function NotificationPermissionPrompt() {
     if (pushStatus === 'subscribed') {
       return (
         <p className="text-xs text-active">
-          Notifications are enabled, including push — you'll be alerted even if this tab isn't open.
+          Notifications are enabled, including push — you&apos;ll be alerted even if this tab isn&apos;t open.
         </p>
       );
     }
@@ -39,7 +39,7 @@ export function NotificationPermissionPrompt() {
     if (pushStatus === 'unconfigured') {
       return (
         <p className="text-xs text-muted">
-          Notifications are enabled for this tab. Push (alerts even when the tab is closed) isn't set up
+          Notifications are enabled for this tab. Push (alerts even when the tab is closed) isn&apos;t set up
           on this deployment yet — see the README for how to add it.
         </p>
       );
@@ -60,7 +60,7 @@ export function NotificationPermissionPrompt() {
         <p className="text-sm font-medium text-text">Turn on browser notifications</p>
         <p className="text-xs text-muted">
           Get notified the moment a new DonutLuck Rain event starts — including via push, if this
-          deployment has it configured, even when this tab isn't open.
+          deployment has it configured, even when this tab isn&apos;t open.
         </p>
       </div>
       <button
