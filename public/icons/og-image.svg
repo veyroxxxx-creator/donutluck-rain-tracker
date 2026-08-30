@@ -1,0 +1,24 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#09070E"/>
+      <stop offset="100%" stop-color="#150F1E"/>
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#B38129"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.5">
+    <line x1="120" y1="0" x2="120" y2="120" stroke="#8B5CF6" stroke-width="2"/>
+    <line x1="220" y1="60" x2="220" y2="220" stroke="#8B5CF6" stroke-width="2"/>
+    <line x1="1000" y1="0" x2="1000" y2="140" stroke="#8B5CF6" stroke-width="2"/>
+    <line x1="1080" y1="80" x2="1080" y2="260" stroke="#8B5CF6" stroke-width="2"/>
+  </g>
+  <circle cx="220" cy="315" r="120" fill="none" stroke="url(#g)" stroke-width="18"/>
+  <path d="M220 250c25 40 45 68 45 96a45 45 0 1 1-90 0c0-28 20-56 45-96z" fill="url(#g)"/>
+  <text x="380" y="290" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#F4F1F9">DonutLuck</text>
+  <text x="380" y="360" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#F4F1F9">Rain Tracker</text>
+  <text x="380" y="410" font-family="Arial, sans-serif" font-size="26" fill="#9E92B4">Live countdown · notifications · custom alarms</text>
+</svg>
