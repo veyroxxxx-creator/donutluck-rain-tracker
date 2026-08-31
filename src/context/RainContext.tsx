@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { fetchRainState, RainFetchError } from '@/services/donutluck';
+import { fetchRainState, lastSuccessfulSource, RainFetchError } from '@/services/donutluck';
 import { OFFLINE_THRESHOLD_MS, POLL_INTERVAL_MS } from '@/lib/constants';
 import type { ConnectionStatus, RainApiResponse } from '@/types/rain';
 import { useSettings } from '@/context/SettingsContext';
@@ -31,6 +31,8 @@ interface RainContextValue {
   /** Reference duration (seconds) the current phase started at — for progress rings. */
   phaseTotalSeconds: number | null;
   error: string | null;
+  /** Which source the last successful snapshot came from — 'direct' means a real browser request; anything else is a fallback proxy. */
+  source: string | null;
   alarm: ReturnType<typeof useAlarmSound>;
   alertLog: AlertLogEntry[];
   triggerTestAlert: () => Promise<void>;
@@ -49,6 +51,7 @@ export function RainProvider({ children }: { children: React.ReactNode }) {
   const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('connecting');
   const [error, setError] = useState<string | null>(null);
+  const [source, setSource] = useState<string | null>(null);
   const [phaseTotalSeconds, setPhaseTotalSeconds] = useState<number | null>(null);
   const [alertLog, setAlertLog] = useState<AlertLogEntry[]>([]);
 
@@ -105,6 +108,7 @@ export function RainProvider({ children }: { children: React.ReactNode }) {
       lastUpdatedAtRef.current = now;
       setConnectionStatus('connected');
       setError(null);
+      setSource(lastSuccessfulSource);
 
       setPhaseTotalSeconds((prevTotal) => {
         const activeChanged = prevActiveRef.current !== null && prevActiveRef.current !== result.active;
@@ -171,6 +175,7 @@ export function RainProvider({ children }: { children: React.ReactNode }) {
       targetAt,
       phaseTotalSeconds,
       error,
+      source,
       alarm,
       alertLog,
       triggerTestAlert,
@@ -183,6 +188,7 @@ export function RainProvider({ children }: { children: React.ReactNode }) {
       targetAt,
       phaseTotalSeconds,
       error,
+      source,
       alarm,
       alertLog,
       triggerTestAlert,
