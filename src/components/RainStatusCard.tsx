@@ -10,13 +10,14 @@ import { ConnectionBadge } from '@/components/ConnectionBadge';
 import { StatTile } from '@/components/StatTile';
 
 export function RainStatusCard() {
-  const { data, connectionStatus, lastUpdatedAt, targetAt, phaseTotalSeconds, error } = useRain();
+  const { data, connectionStatus, lastUpdatedAt, targetAt, phaseTotalSeconds, error, source } = useRain();
   const remainingSeconds = useCountdown(targetAt);
   const now = useNowTick(1000);
 
   const active = data?.active ?? false;
   const isLoading = data === null && connectionStatus !== 'offline';
   const isEmpty = data === null && connectionStatus === 'offline';
+  const usingFallbackSource = Boolean(source && source !== 'direct');
 
   return (
     <section className="card relative overflow-hidden p-6 sm:p-10">
@@ -77,6 +78,13 @@ export function RainStatusCard() {
               value={connectionStatus === 'connected' ? 'Connected' : connectionStatus === 'degraded' ? 'Retrying' : connectionStatus === 'offline' ? 'Offline' : 'Connecting'}
             />
           </div>
+        )}
+
+        {usingFallbackSource && (
+          <p className="max-w-sm text-center text-xs text-muted">
+            Routed via a public proxy ({source}) because your browser couldn&apos;t reach donutluck.com
+            directly.
+          </p>
         )}
       </div>
     </section>
