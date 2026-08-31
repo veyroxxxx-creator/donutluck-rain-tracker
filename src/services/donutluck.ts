@@ -34,7 +34,9 @@ export async function fetchRainState(
     });
 
     if (!res.ok) {
-      throw new RainFetchError(`Rain proxy responded with status ${res.status}`);
+      const body = await res.json().catch(() => null);
+      const detail = body && typeof body === 'object' && 'error' in body ? String((body as { error: unknown }).error) : null;
+      throw new RainFetchError(detail ? `Rain proxy error: ${detail}` : `Rain proxy responded with status ${res.status}`);
     }
 
     const payload: unknown = await res.json();
